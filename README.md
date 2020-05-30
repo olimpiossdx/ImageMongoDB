@@ -4,16 +4,16 @@ Exemplo de envio de arquivos de imagem e gravando com mongoDB
 ## Motivação
 Desenvolvimento de novos projetos com javaScript e aperfeiçoamento, da linguagem com utilização de banco de dados documental.
 
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/olimpiossdx/omniStack">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/olimpiossdx/ImageMongoDB">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/olimpiossdx/omniStack">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/olimpiossdx/ImageMongoDB">
   
-  <a href="https://github.com/olimpiossdx/omniStack/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/olimpiossdx/omniStack">
+  <a href="https://github.com/olimpiossdx/ImageMongoDB/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/olimpiossdx/ImageMongoDB">
   </a>
 
   <a href="https://github.com/Rocketseat/semana-omnistack-10/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/olimpiossdx/omniStack">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/olimpiossdx/ImageMongoDB">
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
@@ -27,4 +27,3 @@ Desenvolvimento de novos projetos com javaScript e aperfeiçoamento, da linguage
 
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
-
