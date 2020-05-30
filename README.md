@@ -20,7 +20,7 @@ Desenvolvimento de novos projetos com javaScript e aperfeiçoamento, da linguage
  
 ## Screenshots
 <h1 align="center">
-    <img alt="ImageMongoDB" src=".github/tela_image_com_mongoDb.png" width="250px" />
+    <img alt="ImageMongoDB" src=".github/tela_image_com_mongoDb.png" width="1024px" />
 </h1>
 
 ## Tecnologias
