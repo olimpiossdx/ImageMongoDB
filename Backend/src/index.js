@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const db = 'mongodb://localhost/react_image';
@@ -10,7 +9,6 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true });
 const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(3000, () => console.log('server started on Port 3000'));
 
 
@@ -28,8 +26,8 @@ const Image = mongoose.model('image', UserSchema);
 
 app.post('/upload', async (req, res) => {
     try {
-        await Image.create(req.body.user);
-        res.status(200);
+        const result = await Image.create(req.body.user);
+        res.status(200).json(result);
     } catch (error) {
         console.error('Algum erro ocorreu ao salvar o arquivo', error);
     }

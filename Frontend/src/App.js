@@ -1,31 +1,39 @@
 import React from 'react';
-import axios from 'axios';
-import logo from './logo.svg';
-import './App.css';
-
 import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
-  root: { '& > *': { margin: theme.spacing(1), } },
-  input: { display: 'none' },
+  root: {
+    flexGrow: 1,
+    marginTop: 200
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
 }));
 
 function App() {
+  const classes = useStyles();
 
   const [image, setImage] = React.useState('');
   const [user, setUser] = React.useState('');
-  const [userFind, setUserFind] = React.useState('');
+  const [userDB, setUserDB] = React.useState('');
 
-  const fetchImage = async () => await axios.get('http://localhost:3000/getLatest').then(result => setUserFind(result.data));
+  const fetchImage = async () => await axios.get('http://localhost:3000/getLatest').then(result => setUserDB(result.data));
 
   React.useEffect(fetchImage, []);
 
   const getBase64 = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log('reader', reader);
+    reader.onload = () => {
       setUser({
         ...user,
         imgUrl1: reader.result.toString(),
@@ -34,43 +42,33 @@ function App() {
       });
     };
 
-    reader.onerror = function (error) {
+    reader.onerror = (error) => {
       console.log('Error: ', error);
     };
   }
 
-  const onChange = async (e) => {
-    
-    console.log('OnchageImage', e.target.files);
-
-    getBase64(e.target.files[0]);
-
-    setImage(URL.createObjectURL(e.target.files[0]));
+  const onChange = async (event) => {
+    getBase64(event.target.files[0]);
+    setImage(URL.createObjectURL(event.target.files[0]));
   }
 
 
   const onSubmit = async () => {
     setUser({ ...user, name: 'teste', extensao: 'png' });
     const response = await axios.post('http://localhost:3000/upload', { user });
+    setUserDB(response.data);
+
   };
 
-  const classes = useStyles();
-  return (<>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-        <div className={classes.root}>
-          <br />
+  return (<div className={classes.root}>
+    <Grid container direction="row" justify="center" alignItems="center" spacing={1}>
+      <Grid item xs={10}>
+        <Paper className={classes.paper}>
+          <img src={image} width="400" alt="Imagem buscada pelo usuário" />
+        </Paper>
+      </Grid>
+      <Grid item xs={10}>
+        <Paper className={classes.paper}>
           <input
             accept="image/*"
             id="contained-button-file"
@@ -78,19 +76,38 @@ function App() {
             type="file"
             onChange={onChange}
           />
-          <Button onClick={onSubmit} variant="contained" color="primary" component="span"> Upload</Button>
+          <Button onClick={onSubmit} variant="contained" color="primary" component="span" size='small'>Enviar</Button>
+        </Paper>
+      </Grid>
+      <Grid item xs={10}>
+        <Paper className={classes.paper}>
+          {userDB ?
+            (<Typography variant="h4" gutterBottom>
+              Imagens carregadas do MongoDB
+            </Typography>)
+            : (<Typography variant="h4" gutterBottom>
+              Envie uma imagem
+            </Typography>)}
+        </Paper>
+      </Grid>
 
-          <br />
-          <img src={image} width="250" alt="" />
-
-          {userFind ? (<>
-            <img src={userFind.imgUrl1} width="250" alt="" />
-            <img src={userFind.imgUrl2} width="250" alt="" />
-            <img src={userFind.imgUrl3} width="250" alt="" /></>) : null}
-        </div>
-      </header>
-    </div>
-  </>);
+      <Grid item xs={3}>
+        <Paper className={classes.paper}>
+          {userDB ? (<img src={userDB.imgUrl1} width="250" alt="" />) : 'Imagem 1'}
+        </Paper>
+      </Grid>
+      <Grid item xs={3}>
+        <Paper className={classes.paper}>
+          {userDB ? (<img src={userDB.imgUrl2} width="250" alt="" />) : 'Imagem 2'}
+        </Paper>
+      </Grid>
+      <Grid item xs={3}>
+        <Paper className={classes.paper}>
+          {userDB ? (<img src={userDB.imgUrl3} width="250" alt="" />) : 'Imagem 3'}
+        </Paper>
+      </Grid>
+    </Grid>
+  </div>);
 }
 
 export default App;
