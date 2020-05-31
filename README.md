@@ -2,7 +2,8 @@
 Exemplo de envio de arquivos de imagem e gravando com mongoDB
 
 ## Motivação
-Desenvolvimento de novos projetos com javaScript e aperfeiçoamento, da linguagem com utilização de banco de dados documental.
+Desenvolvimento de novos projetos com javaScript, typescript. Foi criado um exemplo para adicionar imagens em banco documental com [base64](https://developer.mozilla.org/en-US/docs/Glossary/Base64).
+
 
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/olimpiossdx/ImageMongoDB">
 
